@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class ChatViewController: UIViewController {
+
+  var currentUser: PFUser?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -16,4 +19,8 @@ class ChatViewController: UIViewController {
     // Do any additional setup after loading the view.
   }
 
+  @IBAction func onSignOutButtonTapped(sender: UIBarButtonItem) {
+    PFUser.logOutInBackground()
+    dismissViewControllerAnimated(true, completion: nil)
+  }
 }

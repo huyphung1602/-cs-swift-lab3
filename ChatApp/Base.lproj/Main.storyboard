@@ -60,26 +60,51 @@
                     <connections>
                         <outlet property="passwordTextField" destination="l2Q-Co-1sX" id="8VC-g8-ZNA"/>
                         <outlet property="usernameTextField" destination="cgW-7Y-ZdA" id="TkS-As-HDL"/>
-                        <segue destination="tG6-t7-UWw" kind="modal" identifier="LoginToChat" id="npb-XH-D0x"/>
+                        <segue destination="pZK-FG-S5B" kind="modal" identifier="LoginToChat" id="FqH-tF-Yby"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130" y="295"/>
         </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="tD3-SV-WRA">
+        <!--Chit Chat-->
+        <scene sceneID="BJI-Gn-cdb">
             <objects>
-                <viewController id="tG6-t7-UWw" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xf4-wq-Nho">
+                <viewController id="u6l-ck-hB2" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GgT-4T-Wm3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Chit Chat" id="l1Y-OS-Bfl">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="3cf-jE-RgK">
+                            <connections>
+                                <action selector="onSignOutButtonTapped:" destination="u6l-ck-hB2" id="cWf-fy-Uyi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vpU-7Y-VgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULn-Tp-A50" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="295"/>
+            <point key="canvasLocation" x="1161" y="295"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kcv-rg-1m0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pZK-FG-S5B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eym-GB-HCV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="u6l-ck-hB2" kind="relationship" relationship="rootViewController" id="BN5-5d-ER9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Nq-2b-Eq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="629" y="295"/>
         </scene>
     </scenes>
 </document>

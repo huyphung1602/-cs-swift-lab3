@@ -14,10 +14,20 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
 
+  var currentUser: PFUser?
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // Do any additional setup after loading the view.
+
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    currentUser = PFUser.currentUser()
+    if currentUser != nil {
+      performSegueWithIdentifier("LoginToChat", sender: nil)
+    }
   }
 
   @IBAction func onSubmitButtonTapped(sender: UIButton) {
@@ -34,6 +44,7 @@ class LoginViewController: UIViewController {
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
               print("Login!")
+              self.currentUser = user
               self.performSegueWithIdentifier("LoginToChat", sender: self)
             } else {
               self.showAlert(title: "Error", content: error!.localizedDescription)
@@ -51,6 +62,7 @@ class LoginViewController: UIViewController {
               self.showAlert(title: "Error", content: error.localizedDescription)
             } else {
               print("sign up")
+              self.currentUser = user
               self.performSegueWithIdentifier("LoginToChat", sender: self)
             }
           }
@@ -59,6 +71,14 @@ class LoginViewController: UIViewController {
         self.showAlert(title: "Error", content: error!.localizedDescription)
       }
     })
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let nvc = segue.destinationViewController as? UINavigationController, vc = nvc.topViewController as? ChatViewController {
+      if let currentUser = currentUser {
+        vc.currentUser = currentUser
+      }
+    }
   }
 
 }
