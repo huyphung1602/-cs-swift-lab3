@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
     let username = usernameTextField.text ?? ""
     let password = passwordTextField.text ?? ""
 
+    if username.trim().characters.count == 0 || password.trim().characters.count == 0 {
+      return
+    }
+
     let query = PFUser.query()
     query?.whereKey("username", equalTo: username)
     query?.findObjectsInBackgroundWithBlock({ (results, error) in
