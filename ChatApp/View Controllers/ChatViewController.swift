@@ -25,7 +25,23 @@ class ChatViewController: UIViewController {
     tableView.estimatedRowHeight = 80
     tableView.rowHeight = UITableViewAutomaticDimension
 
+    chatTextField.layer.borderColor = UIColor.whiteColor().CGColor
+    chatTextField.layer.borderWidth = 1
+    chatTextField.layer.cornerRadius = 5
+
     NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(ChatViewController.onTimer), userInfo: nil, repeats: true)
+
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.endEditting))
+    tableView.addGestureRecognizer(tapGesture)
+  }
+
+  func endEditting() {
+    view.endEditing(true)
+  }
+
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    super.touchesBegan(touches, withEvent: event)
+    view.endEditing(true)
   }
 
   @IBAction func onSignOutButtonTapped(sender: UIBarButtonItem) {
