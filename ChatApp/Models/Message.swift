@@ -25,6 +25,13 @@ class Message {
     return createdAt?.timeAgo() ?? ""
   }
 
+  static func createPFObject(text: String) -> PFObject {
+    let message = PFObject(className: messageClassName)
+    message["text"] = text
+    message["user"] = PFUser.currentUser()
+    return message
+  }
+
   static func messagesFromObjects(objects: [PFObject]) -> [Message] {
     var messages = [Message]()
     objects.forEach { object in

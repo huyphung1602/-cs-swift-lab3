@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+let messageClassName = "Message_Swift_032016"
+
 class ChatViewController: UIViewController {
 
   @IBOutlet weak var chatTextField: UITextField!
@@ -36,7 +38,7 @@ class ChatViewController: UIViewController {
   }
 
   func queryMessages() {
-    let query = PFQuery(className: "Message_Swift_032016")
+    let query = PFQuery(className: messageClassName)
     query.orderByDescending("createdAt")
     query.whereKey("text", notEqualTo: "")
     query.includeKey("user")
@@ -48,6 +50,19 @@ class ChatViewController: UIViewController {
       } else {
         self.showAlert(title: "Error", content: error!.localizedDescription)
       }
+    }
+  }
+
+  @IBAction func onSendButtonTapped(sender: UIButton) {
+    if let text = chatTextField.text where text.trim().characters.count > 0 {
+      let message = Message.createPFObject(text)
+      message.saveInBackgroundWithBlock({ (success, error) in
+        if success {
+          self.queryMessages()
+        } else {
+          self.showAlert(title: "Error", content: error!.localizedDescription)
+        }
+      })
     }
   }
 }
@@ -65,3 +80,4 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
 }
+
