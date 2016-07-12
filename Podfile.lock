@@ -1,15 +1,18 @@
 PODS:
   - Bolts/Tasks (1.7.0)
+  - NSDate+TimeAgo (1.0.6)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
 
 DEPENDENCIES:
+  - NSDate+TimeAgo
   - Parse
 
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
 
-PODFILE CHECKSUM: 26eb8a8efd32e8133af82d36127301b69bfcf83c
+PODFILE CHECKSUM: da9951ae63ed5915ce8ff79795e7e91bb9e34326
 
 COCOAPODS: 1.0.0

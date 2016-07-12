@@ -7,4 +7,5 @@ target 'ChatApp' do
 
   # Pods for ChatApp
   pod 'Parse'
+  pod 'NSDate+TimeAgo'
 end
