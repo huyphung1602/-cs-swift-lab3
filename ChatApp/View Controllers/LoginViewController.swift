@@ -13,13 +13,12 @@ class LoginViewController: UIViewController {
 
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
+  @IBOutlet weak var submitButton: UIButton!
 
   var currentUser: PFUser?
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -28,6 +27,11 @@ class LoginViewController: UIViewController {
     if currentUser != nil {
       performSegueWithIdentifier("LoginToChat", sender: nil)
     }
+  }
+
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    super.touchesBegan(touches, withEvent: event)
+    view.endEditing(true)
   }
 
   @IBAction func onSubmitButtonTapped(sender: UIButton) {
@@ -81,4 +85,16 @@ class LoginViewController: UIViewController {
     }
   }
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    if textField == usernameTextField {
+      passwordTextField?.becomeFirstResponder()
+    } else {
+      view.endEditing(true)
+      onSubmitButtonTapped(submitButton)
+    }
+    return true
+  }
 }
