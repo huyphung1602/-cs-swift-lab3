@@ -74,6 +74,7 @@ class ChatViewController: UIViewController {
       let message = Message.createPFObject(text)
       message.saveInBackgroundWithBlock({ (success, error) in
         if success {
+          self.chatTextField.text = ""
           self.queryMessages()
         } else {
           self.showAlert(title: "Error", content: error!.localizedDescription)
