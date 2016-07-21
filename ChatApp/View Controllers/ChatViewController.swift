@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-let messageClassName = "Message_Swift_032016"
+let messageClassName = "Message_Swift_072016"
 
 class ChatViewController: UIViewController {
 
