@@ -21,20 +21,20 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
   }
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    currentUser = PFUser.currentUser()
+    currentUser = PFUser.current()
     if currentUser != nil {
-      performSegueWithIdentifier("LoginToChat", sender: nil)
+      performSegue(withIdentifier: "LoginToChat", sender: nil)
     }
   }
 
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    super.touchesBegan(touches, withEvent: event)
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
     view.endEditing(true)
   }
 
-  @IBAction func onSubmitButtonTapped(sender: UIButton) {
+  @IBAction func onSubmitButtonTapped(_ sender: UIButton) {
     let username = usernameTextField.text ?? ""
     let password = passwordTextField.text ?? ""
 
@@ -44,16 +44,16 @@ class LoginViewController: UIViewController {
 
     let query = PFUser.query()
     query?.whereKey("username", equalTo: username)
-    query?.findObjectsInBackgroundWithBlock({ (results, error) in
+    query?.findObjectsInBackground(block: { (results, error) in
       if let results = results {
         if results.count > 0 {
           // Sign in
-          PFUser.logInWithUsernameInBackground(username, password: password) {
-            (user: PFUser?, error: NSError?) -> Void in
+          PFUser.logInWithUsername(inBackground: username, password: password) {
+            (user: PFUser?, error: Error?) -> Void in
             if user != nil {
               print("Login!")
               self.currentUser = user
-              self.performSegueWithIdentifier("LoginToChat", sender: self)
+              self.performSegue(withIdentifier: "LoginToChat", sender: self)
             } else {
               self.showAlert(title: "Error", content: error!.localizedDescription)
             }
@@ -64,14 +64,14 @@ class LoginViewController: UIViewController {
           user.username = username
           user.password = password
 
-          user.signUpInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError?) -> Void in
+          user.signUpInBackground {
+            (succeeded: Bool, error: Error?) -> Void in
             if let error = error {
               self.showAlert(title: "Error", content: error.localizedDescription)
             } else {
               print("sign up")
               self.currentUser = user
-              self.performSegueWithIdentifier("LoginToChat", sender: self)
+              self.performSegue(withIdentifier: "LoginToChat", sender: self)
             }
           }
         }
@@ -81,8 +81,8 @@ class LoginViewController: UIViewController {
     })
   }
 
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let nvc = segue.destinationViewController as? UINavigationController, vc = nvc.topViewController as? ChatViewController {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? ChatViewController {
       if let currentUser = currentUser {
         vc.currentUser = currentUser
       }
@@ -92,7 +92,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == usernameTextField {
       passwordTextField?.becomeFirstResponder()
     } else {

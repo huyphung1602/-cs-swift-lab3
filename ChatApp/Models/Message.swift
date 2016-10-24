@@ -12,7 +12,7 @@ import NSDate_TimeAgo
 
 class Message {
   var text = ""
-  var createdAt: NSDate?
+  var createdAt: Date?
   var user: PFUser?
 
   init(object: PFObject) {
@@ -22,17 +22,17 @@ class Message {
   }
 
   var timestamp: String {
-    return createdAt?.timeAgo() ?? ""
+    return (createdAt as NSDate?)?.timeAgo() ?? ""
   }
 
-  static func createPFObject(text: String) -> PFObject {
+  static func createPFObject(_ text: String) -> PFObject {
     let message = PFObject(className: messageClassName)
     message["text"] = text
-    message["user"] = PFUser.currentUser()
+    message["user"] = PFUser.current()
     return message
   }
 
-  static func messagesFromObjects(objects: [PFObject]) -> [Message] {
+  static func messagesFromObjects(_ objects: [PFObject]) -> [Message] {
     var messages = [Message]()
     objects.forEach { object in
       messages.append(Message(object: object))

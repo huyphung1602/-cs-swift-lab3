@@ -171,6 +171,7 @@
 					A59C513D1D3356F100D8F9B5 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = D3E7UH3PXS;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -384,6 +385,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cheetah.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -396,6 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cheetah.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
